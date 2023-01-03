@@ -20,7 +20,7 @@ final class SearchView: UIView {
     // MARK: - Init
     
     override init(frame: CGRect) {
-        super.init(frame: frame)
+        super.init(frame: frame) 
         self.configureUI()
     }
     

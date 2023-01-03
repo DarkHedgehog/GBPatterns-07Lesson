@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SearchViewController: UIViewController {
+final class SearchAppViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -31,7 +31,7 @@ final class SearchViewController: UIViewController {
         static let reuseIdentifier = "reuseId"
     }
     
-    private let presenter: SearchViewOutput
+    private let presenter: SearchAppViewOutput
     
     private let searchBar = UISearchBar()
     private let tableView = UITableView()
@@ -40,7 +40,7 @@ final class SearchViewController: UIViewController {
     
     // MARK: - Construction
     
-    init(presenter: SearchViewOutput) {
+    init(presenter: SearchAppViewOutput) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
@@ -72,7 +72,7 @@ final class SearchViewController: UIViewController {
 }
 
 //MARK: - UITableViewDataSource
-extension SearchViewController: UITableViewDataSource {
+extension SearchAppViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResults.count
@@ -94,7 +94,7 @@ extension SearchViewController: UITableViewDataSource {
 }
 
 //MARK: - UITableViewDelegate
-extension SearchViewController: UITableViewDelegate {
+extension SearchAppViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let app = searchResults[indexPath.row]
@@ -103,7 +103,7 @@ extension SearchViewController: UITableViewDelegate {
 }
 
 //MARK: - UISearchBarDelegate
-extension SearchViewController: UISearchBarDelegate {
+extension SearchAppViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text else {
@@ -120,7 +120,7 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 // MARK: - Input
-extension SearchViewController: SearchViewInput {
+extension SearchAppViewController: SearchAppViewInput {
     func showError(error: Error) {
         let alert = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
         let actionOk = UIAlertAction(title: "OK", style: .cancel, handler: nil)
