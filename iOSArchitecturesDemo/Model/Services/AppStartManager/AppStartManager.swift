@@ -17,22 +17,44 @@ final class AppStartManager {
     }
     
     func start() {
-        let rootVC = SearchModuleBuilder.build()
-        rootVC.navigationItem.title = "Search via iTunes"
-        
-        let navVC = self.configuredNavigationController
-        navVC.viewControllers = [rootVC]
-        
-        window?.rootViewController = navVC
+
+        let appSearchVC = configureAppSearchController()
+        let songSearchVC = configureSongsSearchController()
+
+        let tabsVC = UITabBarController()
+        tabsVC.setViewControllers([appSearchVC, songSearchVC], animated: false)
+
+        window?.rootViewController = tabsVC
         window?.makeKeyAndVisible()
     }
-    
-    private lazy var configuredNavigationController: UINavigationController = {
+
+    private func configureAppSearchController() -> UIViewController {
+        let appSearchVC = SearchAppModuleBuilder.build()
+        appSearchVC.navigationItem.title = "Search via iTunes"
+
         let navVC = UINavigationController()
         navVC.navigationBar.barTintColor = UIColor.varna
         navVC.navigationBar.isTranslucent = false
         navVC.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navVC.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+
+        navVC.viewControllers = [appSearchVC]
+        navVC.title = "Apps"
         return navVC
-    }()
+    }
+
+    private func configureSongsSearchController() -> UIViewController {
+        let songSearchVC = SearchSongModuleBuilder.build()
+        songSearchVC.navigationItem.title = "Songs via iTunes"
+
+        let navVC = UINavigationController()
+        navVC.navigationBar.barTintColor = UIColor.varna
+        navVC.navigationBar.isTranslucent = false
+        navVC.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navVC.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+
+        navVC.viewControllers = [songSearchVC]
+        navVC.title = "Songs"
+        return navVC
+    }
 }

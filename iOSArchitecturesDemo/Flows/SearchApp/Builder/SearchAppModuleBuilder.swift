@@ -8,10 +8,10 @@
 
 import UIKit
 
-class SearchModuleBuilder {
-    static func build() -> (UIViewController & SearchViewInput) {
-        let presenter = SearchPresenter()
-        let viewController = SearchViewController(presenter: presenter)
+class SearchAppModuleBuilder {
+    static func build() -> (UIViewController & SearchAppViewInput) {
+        let presenter = SearchAppPresenter()
+        let viewController = SearchAppViewController(presenter: presenter)
         presenter.viewInput = viewController
         return viewController
     }
